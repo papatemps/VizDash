@@ -51,13 +51,21 @@ meanchart_points = alt.Chart(yeartemp).mark_circle(size=30).encode(
         title="Country by colour"))
 ).properties(title="Annual Average Temperature by Country")
 
-unc_chart = alt.Chart(dfcountry).mark_line().encode(
+unc_chartline = alt.Chart(dfcountry).mark_line().encode(
     x=alt.X('Date:T', axis=alt.Axis(format='%Y')),
     y=alt.Y('AverageTemperatureUncertainty:Q', axis=alt.Axis(
         title='Average Temperature Uncertainty')),
     color=alt.Color('Country:N', legend=alt.Legend(
         title="Country by colour"))
-).properties(title="95th CI in Temperatures")
+).properties(title="95th CI for Temperatures")
+
+unc_chartarea = alt.Chart(dfcountry).mark_area(opacity=0.5).encode(
+    x=alt.X('Date:T', axis=alt.Axis(format='%Y')),
+    y=alt.Y('AverageTemperatureUncertainty:Q', axis=alt.Axis(
+        title='Average Temperature Uncertainty')),
+    color=alt.Color('Country:N', legend=alt.Legend(
+        title="Country by colour"))
+).properties(title="95th CI for Temperatures")
 
 tab1, tab2 = st.tabs(["Annual Mean", "Monthly Mean"])
 
@@ -68,7 +76,13 @@ with tab1:
 with tab2:
     st.altair_chart((chart + chartpoints).interactive(), use_container_width=True)
 
-st.altair_chart((unc_chart).interactive(), use_container_width=True)
+tab3, tab4 = st.tabs(["Line Chart", "Area Chart"])
+
+with tab3:
+    st.altair_chart((unc_chartline).interactive(), use_container_width=True)
+
+with tab4:
+    st.altair_chart((unc_chartarea).interactive(), use_container_width=True)
 
 
 

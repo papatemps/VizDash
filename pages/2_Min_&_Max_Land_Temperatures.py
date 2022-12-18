@@ -81,14 +81,14 @@ unc_chartmax = alt.Chart(dftemp).mark_area(opacity=0.5).encode(
     y=alt.Y('LandMaxTemperatureUncertainty:Q', axis=alt.Axis(
         title='Average Temperature Uncertainty'), stack=None),
     color=alt.value('orange')
-).properties(title="95th CI in Temperatures")
+).properties(title="95th CI for Temperatures")
 
 unc_chartmin = alt.Chart(dftemp).mark_area(opacity=0.5).encode(
     x=alt.X('Date:T', axis=alt.Axis(format='%Y')),
     y=alt.Y('LandMinTemperatureUncertainty:Q', axis=alt.Axis(
         title='Average Temperature Uncertainty'), stack=None),
     color=alt.value('cyan')
-).properties(title="95th CI in Temperatures")
+).properties(title="95th CI for Temperatures")
 
 # TABS WITH MONTHLY MIN AND MAX TEMPERATURES
 tab1, tab2, tab3 = st.tabs(["Annual Maximum & Minimum", "Monthly Maximum", "Monthly Minimum"])
